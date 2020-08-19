@@ -26,3 +26,9 @@ LawvereTheories o ℓ e = record
   ; ∘-resp-≈ = _ⓘₕ_
   }
   where open LT-Hom
+
+-- TOOD Sum of Lawvere Theories
+
+-- TODO Tensor Product of Lawvere Theories
+
+-- TODO Model Category for a given Lawvere Theory and Category C
