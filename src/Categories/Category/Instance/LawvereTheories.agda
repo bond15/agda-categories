@@ -9,6 +9,12 @@ open import Categories.Category
 open import Categories.Functor.Cartesian.Properties
 open import Categories.NaturalTransformation.NaturalIsomorphism
 open import Categories.Theory.Lawvere
+--
+open import Categories.Functor.Core
+open import Categories.Category.Finite.Fin
+open import Categories.Category.Instance.FinSetoids
+open import Categories.Category.Cartesian
+open import Categories.Functor.Cartesian
 
 LawvereTheories : (o ℓ e : Level) → Category (suc (o ⊔ ℓ ⊔ e)) (o ⊔ ℓ ⊔ e) (o ⊔ ℓ ⊔ e)
 LawvereTheories o ℓ e = record
@@ -26,6 +32,25 @@ LawvereTheories o ℓ e = record
   ; ∘-resp-≈ = _ⓘₕ_
   }
   where open LT-Hom
+
+shape : FinCatShape
+shape = record
+  { size = 5
+  ; ∣_⇒_∣ = {!   !}
+  ; hasShape = {!   !}
+  }
+
+record LawvereTheory (o ℓ e : Level) : Set (suc (suc(o ⊔ ℓ ⊔ e))) where
+  field
+    L : Category o ℓ e
+  -- category with finite products
+    cartL : Cartesian L
+
+    cartℕ₀ : Cartesian (Category.op (FinSetoids o ℓ))
+  -- product preserving bijection on objects functor
+    T : Functor (Category.op (FinSetoids o ℓ)) L
+
+    cartT : CartesianF cartℕ₀ cartL T
 
 -- TOOD Sum of Lawvere Theories
 
